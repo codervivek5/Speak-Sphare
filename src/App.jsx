@@ -6,6 +6,7 @@ import Courses from './pages/Courses'
 import Practice from './pages/Practice'
 import Dashboard from './pages/Dashboard'
 import Profile from './pages/Profile'
+import NotFound from './pages/NotFound'
 import './App.css'
 
 function App() {
@@ -17,9 +18,11 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/courses" element={<Courses />} />
+            <Route path="/course/:id" element={<Courses />} /> {/* Placeholder for individual course */}
             <Route path="/practice" element={<Practice />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />

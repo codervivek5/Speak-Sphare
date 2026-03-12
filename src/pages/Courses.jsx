@@ -13,7 +13,7 @@ const Courses = () => {
       rating: 4.8,
       description: 'Master fundamental English communication skills',
       topics: ['Greetings & Introductions', 'Basic Vocabulary', 'Simple Conversations', 'Pronunciation Basics'],
-      color: 'from-green-400 to-emerald-500'
+      color: 'from-blue-500/20 to-indigo-500/20 border-blue-500/30'
     },
     {
       id: 2,
@@ -25,7 +25,7 @@ const Courses = () => {
       rating: 4.9,
       description: 'Build confidence in everyday English conversations',
       topics: ['Daily Conversations', 'Social Interactions', 'Travel English', 'Phone Conversations'],
-      color: 'from-yellow-400 to-orange-500'
+      color: 'from-purple-500/20 to-pink-500/20 border-purple-500/30'
     },
     {
       id: 3,
@@ -37,7 +37,7 @@ const Courses = () => {
       rating: 4.7,
       description: 'Professional English for workplace success',
       topics: ['Presentations', 'Meetings', 'Email Writing', 'Networking'],
-      color: 'from-blue-400 to-cyan-500'
+      color: 'from-emerald-500/20 to-teal-500/20 border-emerald-500/30'
     },
     {
       id: 4,
@@ -49,7 +49,7 @@ const Courses = () => {
       rating: 4.9,
       description: 'Perfect your pronunciation and fluency',
       topics: ['Accent Reduction', 'Idioms & Expressions', 'Debate Skills', 'Public Speaking'],
-      color: 'from-red-400 to-pink-500'
+      color: 'from-orange-500/20 to-red-500/20 border-orange-500/30'
     }
   ];
 
@@ -67,20 +67,20 @@ const Courses = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         {/* Header */}
         <div className="text-center mb-10 md:mb-16 animate-fade-in-up">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
             Explore Our <span className="gradient-text">Courses</span>
           </h1>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto">
             Choose the perfect course to match your English learning goals and skill level
           </p>
         </div>
 
         {/* Courses Grid */}
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {courses.map((course, index) => (
             <div
               key={course.id}
-              className="glass-card rounded-3xl p-8 card-hover shadow-lg animate-fade-in-up group border border-gray-100"
+              className={`glass-card rounded-3xl p-8 card-hover shadow-lg animate-fade-in-up group border bg-gradient-to-br ${course.color}`}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {/* Header */}
@@ -89,10 +89,10 @@ const Courses = () => {
                   <span className={`inline-block px-4 py-2 rounded-full text-sm font-semibold border ${getLevelColor(course.level)} mb-4`}>
                     {course.level}
                   </span>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
+                  <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-primary-300 transition-colors">
                     {course.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-slate-300 leading-relaxed">
                     {course.description}
                   </p>
                 </div>
@@ -120,11 +120,11 @@ const Courses = () => {
 
               {/* Topics */}
               <div className="mb-6">
-                <h4 className="text-lg font-semibold text-gray-900 mb-4">What you'll learn:</h4>
+                <h4 className="text-lg font-semibold text-white mb-4">What you'll learn:</h4>
                 <ul className="space-y-3">
                   {course.topics.map((topic, idx) => (
-                    <li key={idx} className="flex items-start gap-3 text-gray-600">
-                      <span className={`flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br ${course.color} flex items-center justify-center text-white text-sm font-bold mt-0.5`}>
+                    <li key={idx} className="flex items-start gap-3 text-slate-300">
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-white/10 flex items-center justify-center text-white text-sm font-bold mt-0.5">
                         ✓
                       </span>
                       <span>{topic}</span>
@@ -136,7 +136,7 @@ const Courses = () => {
               {/* CTA Button */}
               <Link
                 to={`/course/${course.id}`}
-                className={`block w-full text-center bg-gradient-to-r ${course.color} text-white px-6 py-4 rounded-xl font-semibold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105`}
+                className="block w-full text-center bg-white/10 hover:bg-white/20 text-white border border-white/20 px-6 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105"
               >
                 Enroll Now
               </Link>

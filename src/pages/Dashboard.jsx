@@ -29,34 +29,34 @@ const Dashboard = () => {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 md:mb-12 animate-fade-in-up">
           <div>
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
+            <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">
               Welcome back, <span className="gradient-text">Sarah!</span>
             </h1>
-            <p className="text-gray-600">Continue your journey to English mastery</p>
+            <p className="text-slate-400">Continue your journey to English mastery</p>
           </div>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl p-6 card-hover border border-gray-100 shadow-sm animate-fade-in-up group"
+              className="glass-card rounded-2xl p-6 card-hover animate-fade-in-up group"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="flex items-center justify-between mb-4">
-                <div className={`p-3 rounded-xl bg-gradient-to-br ${stat.color} text-white shadow-sm shadow-${stat.color.split('-')[1]}-500/30`}>
+                <div className={`p-3 rounded-xl bg-gradient-to-br ${stat.color} text-white shadow-lg`}>
                   {stat.icon}
                 </div>
                 {stat.trend && (
-                  <span className="text-green-600 text-sm font-semibold flex items-center">
+                  <span className="text-emerald-400 text-sm font-semibold flex items-center">
                     <TrendingUp size={16} className="mr-1" />
                     {stat.trend}
                   </span>
                 )}
               </div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</h3>
-              <p className="text-gray-600 font-medium">{stat.label}</p>
+              <h3 className="text-3xl font-bold text-white mb-1">{stat.value}</h3>
+              <p className="text-slate-400 font-medium">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -64,22 +64,22 @@ const Dashboard = () => {
         <div className="grid lg:grid-cols-3 gap-6 md:gap-8">
           {/* Recent Activity */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-3xl p-8 animate-slide-in-left border border-gray-100 shadow-sm">
+            <div className="glass-card rounded-3xl p-8 animate-slide-in-left">
               <div className="flex items-center gap-3 mb-6">
-                <Clock size={28} className="text-primary-400" />
-                <h2 className="text-2xl font-bold text-gray-900">Recent Activity</h2>
+                <Clock size={28} className="text-primary-300" />
+                <h2 className="text-2xl font-bold text-white">Recent Activity</h2>
               </div>
 
               <div className="space-y-4">
                 {recentActivity.map((activity, index) => (
                   <div
                     key={index}
-                    className="bg-white hover:bg-gray-50 border border-gray-100 p-6 rounded-2xl transition-all duration-300 group shadow-sm"
+                    className="bg-white/5 hover:bg-white/10 border border-white/5 p-6 rounded-2xl transition-all duration-300 group shadow-lg"
                   >
                     <div className="flex items-start justify-between mb-4">
                       <div>
-                        <p className="text-gray-400 mb-2">{activity.lesson}</p>
-                        <span className="text-sm text-gray-500">{activity.date}</span>
+                        <p className="text-slate-300 mb-2">{activity.lesson}</p>
+                        <span className="text-sm text-slate-500">{activity.date}</span>
                       </div>
                       <span className={`px-4 py-2 rounded-full bg-gradient-to-r ${activity.color} text-white font-bold text-sm shadow-lg`}>
                         {activity.progress}%
@@ -111,17 +111,17 @@ const Dashboard = () => {
                   <div
                     key={index}
                     className={`p-4 rounded-xl transition-all duration-300 border ${achievement.unlocked
-                      ? 'bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-white border-yellow-500/30'
-                      : 'glass-card border-white/5 opacity-60'
+                      ? 'bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-white border-yellow-500/30 shadow-lg'
+                      : 'bg-white/5 border-white/5 opacity-40'
                       }`}
                   >
                     <div className="flex items-center gap-3">
                       <span className="text-3xl">{achievement.icon}</span>
                       <div>
-                        <h4 className={`font-bold mb-1 ${achievement.unlocked ? 'text-white' : 'text-gray-500'}`}>
+                        <h4 className={`font-bold mb-1 ${achievement.unlocked ? 'text-white' : 'text-slate-500'}`}>
                           {achievement.title}
                         </h4>
-                        <p className={`text-sm ${achievement.unlocked ? 'text-gray-300' : 'text-gray-600'}`}>
+                        <p className={`text-sm ${achievement.unlocked ? 'text-slate-300' : 'text-slate-600'}`}>
                           {achievement.description}
                         </p>
                       </div>
@@ -143,12 +143,12 @@ const Dashboard = () => {
             {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, index) => (
               <div key={index} className="flex flex-col items-center">
                 <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center font-bold text-lg transition-transform hover:scale-110 ${index < 5
-                  ? 'bg-gradient-to-br from-green-500/20 to-emerald-500/20 text-green-400 border border-green-500/30 shadow-[0_0_15px_rgba(16,185,129,0.2)]'
-                  : 'glass-card text-gray-600 border border-white/10'
+                  ? 'bg-gradient-to-br from-indigo-500/30 to-purple-500/30 text-indigo-300 border border-indigo-500/40 shadow-lg glow'
+                  : 'bg-white/5 text-slate-600 border border-white/5'
                   }`}>
                   {index < 5 ? '✓' : ''}
                 </div>
-                <span className="text-sm text-gray-400 mt-2 font-medium">{day}</span>
+                <span className="text-sm text-slate-500 mt-2 font-medium">{day}</span>
               </div>
             ))}
           </div>

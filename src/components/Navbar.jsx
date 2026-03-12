@@ -23,7 +23,7 @@ const Navbar = () => {
             <div className="bg-gradient-to-br from-primary-500 to-secondary-500 p-2 rounded-xl animate-glow group-hover:scale-110 transition-transform">
               <BookOpen size={28} className="text-white" />
             </div>
-            <span className="text-xl font-bold gradient-text hidden sm:block">SpeakSphere</span>
+            <span className="text-xl font-bold gradient-text block">SpeakSphere</span>
           </Link>
 
           {/* Desktop Menu */}
@@ -32,17 +32,16 @@ const Navbar = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`relative px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
-                  isActive(link.path)
-                    ? 'text-primary-600 bg-primary-50'
-                    : 'text-gray-600 hover:text-primary-600 hover:bg-gray-50'
-                }`}
+                className={`relative px-4 py-2 rounded-lg font-medium transition-all duration-300 ${isActive(link.path)
+                  ? 'text-white bg-white/10'
+                  : 'text-slate-300 hover:text-white hover:bg-white/5'
+                  }`}
               >
                 {link.name}
               </Link>
             ))}
-            <Link 
-              to="/profile" 
+            <Link
+              to="/profile"
               className="ml-4 flex items-center gap-2 bg-gradient-to-r from-primary-600 to-secondary-600 text-white px-6 py-2.5 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
             >
               <User size={18} strokeWidth={2.5} />
@@ -51,8 +50,8 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
+          <button
+            className="md:hidden p-2 rounded-lg text-slate-300 hover:bg-white/10 transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -61,25 +60,24 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden bg-white/95 backdrop-blur-lg border-t transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-[28rem] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+      <div className={`md:hidden glass-effect border-t border-white/10 transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-[28rem] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
         <div className="px-4 py-6 space-y-2">
           {navLinks.map((link) => (
-            <Link 
+            <Link
               key={link.path}
-              to={link.path} 
-              className={`block px-4 py-3 rounded-lg font-medium transition-all ${
-                isActive(link.path)
-                  ? 'bg-primary-50 text-primary-600'
-                  : 'text-gray-600 hover:text-primary-600 hover:bg-gray-50'
-              }`}
+              to={link.path}
+              className={`block px-4 py-3 rounded-lg font-medium transition-all ${isActive(link.path)
+                ? 'bg-white/10 text-white'
+                : 'text-slate-300 hover:text-white hover:bg-white/5'
+                }`}
               onClick={() => setIsMenuOpen(false)}
             >
               {link.name}
             </Link>
           ))}
-          <Link 
-            to="/profile" 
-            className="flex items-center justify-center gap-2 bg-gradient-to-r from-primary-600 to-secondary-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg mt-4"
+          <Link
+            to="/profile"
+            className="flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg mt-4 active:scale-95 transition-transform"
             onClick={() => setIsMenuOpen(false)}
           >
             <User size={18} strokeWidth={2.5} />

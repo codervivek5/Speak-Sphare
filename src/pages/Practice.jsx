@@ -51,7 +51,7 @@ const Practice = () => {
   };
 
   const getDifficultyColor = (difficulty) => {
-    switch(difficulty) {
+    switch (difficulty) {
       case 'Beginner': return 'bg-green-100 text-green-700';
       case 'Intermediate': return 'bg-yellow-100 text-yellow-700';
       case 'Advanced': return 'bg-red-100 text-red-700';
@@ -75,35 +75,32 @@ const Practice = () => {
         <div className="grid lg:grid-cols-12 gap-6 md:gap-8">
           {/* Exercises List */}
           <div className="lg:col-span-4 order-2 lg:order-1">
-            <div className="glass-effect rounded-2xl p-6 animate-slide-in-left lg:sticky lg:top-24">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">Available Exercises</h2>
+            <div className="glass-card rounded-2xl p-6 animate-slide-in-left lg:sticky lg:top-24">
+              <h2 className="text-2xl font-bold text-white mb-6">Available Exercises</h2>
               <div className="space-y-4">
                 {exercises.map((exercise) => (
-                  <div 
-                    key={exercise.id} 
-                    className={`p-4 rounded-xl cursor-pointer transition-all duration-300 ${
-                      selectedExercise?.id === exercise.id 
-                        ? `bg-gradient-to-r ${exercise.color} text-white shadow-lg scale-105` 
-                        : 'bg-gray-50 hover:bg-gray-100'
-                    }`}
+                  <div
+                    key={exercise.id}
+                    className={`p-4 rounded-xl cursor-pointer transition-all duration-300 ${selectedExercise?.id === exercise.id
+                      ? `bg-gradient-to-r ${exercise.color} text-white shadow-lg scale-105`
+                      : 'bg-white/5 hover:bg-white/10'
+                      }`}
                     onClick={() => setSelectedExercise(exercise)}
                   >
-                    <h3 className={`font-bold text-lg mb-2 ${selectedExercise?.id === exercise.id ? 'text-white' : 'text-gray-800'}`}>
+                    <h3 className={`font-bold text-lg mb-2 ${selectedExercise?.id === exercise.id ? 'text-white' : 'text-slate-200'}`}>
                       {exercise.title}
                     </h3>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                        selectedExercise?.id === exercise.id 
-                          ? 'bg-white/30 text-white' 
-                          : 'bg-primary-100 text-primary-700'
-                      }`}>
+                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${selectedExercise?.id === exercise.id
+                        ? 'bg-white/30 text-white'
+                        : 'bg-primary-100 text-primary-700'
+                        }`}>
                         {exercise.type}
                       </span>
-                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                        selectedExercise?.id === exercise.id 
-                          ? 'bg-white/30 text-white' 
-                          : getDifficultyColor(exercise.difficulty)
-                      }`}>
+                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${selectedExercise?.id === exercise.id
+                        ? 'bg-white/30 text-white'
+                        : getDifficultyColor(exercise.difficulty)
+                        }`}>
                         {exercise.difficulty}
                       </span>
                     </div>
@@ -116,16 +113,16 @@ const Practice = () => {
           {/* Practice Area */}
           <div className="lg:col-span-8 order-1 lg:order-2">
             {selectedExercise ? (
-              <div className="glass-effect rounded-3xl p-8 animate-slide-in-right">
+              <div className="glass-card rounded-3xl p-8 animate-slide-in-right">
                 <div className="mb-8">
-                  <h2 className="text-3xl font-bold text-gray-800 mb-4">
+                  <h2 className="text-3xl font-bold text-white mb-4">
                     {selectedExercise.title}
                   </h2>
                   <div className="flex items-center gap-3">
-                    <span className={`px-4 py-2 rounded-full font-semibold bg-gradient-to-r ${selectedExercise.color} text-white`}>
+                    <span className={`px-4 py-2 rounded-full font-semibold bg-gradient-to-r ${selectedExercise.color} text-white shadow-lg`}>
                       {selectedExercise.type}
                     </span>
-                    <span className={`px-4 py-2 rounded-full font-semibold ${getDifficultyColor(selectedExercise.difficulty)}`}>
+                    <span className={`px-4 py-2 rounded-full font-semibold bg-white/10 text-white border border-white/10`}>
                       {selectedExercise.difficulty}
                     </span>
                   </div>
@@ -134,11 +131,11 @@ const Practice = () => {
                 {/* Pronunciation Exercise */}
                 {selectedExercise.type === 'Pronunciation' && (
                   <div className="space-y-4 mb-8">
-                    <h3 className="text-xl font-semibold text-gray-800 mb-4">Practice These Phrases:</h3>
+                    <h3 className="text-xl font-semibold text-white mb-4">Practice These Phrases:</h3>
                     {selectedExercise.phrases.map((phrase, index) => (
-                      <div key={index} className="flex items-center justify-between p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl hover:shadow-md transition-all">
-                        <p className="text-gray-800 font-medium text-lg">{phrase}</p>
-                        <button className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white p-3 rounded-full hover:scale-110 transition-transform">
+                      <div key={index} className="flex items-center justify-between p-4 bg-white/5 border border-white/5 rounded-xl hover:bg-white/10 transition-all shadow-md">
+                        <p className="text-slate-200 font-medium text-lg">{phrase}</p>
+                        <button className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white p-3 rounded-full hover:scale-110 transition-transform shadow-lg">
                           <Volume2 size={20} />
                         </button>
                       </div>
@@ -149,9 +146,9 @@ const Practice = () => {
                 {/* Speaking Exercise */}
                 {selectedExercise.type === 'Speaking' && (
                   <div className="mb-8">
-                    <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border-l-4 border-primary-500 p-6 rounded-xl">
-                      <h3 className="text-xl font-semibold text-gray-800 mb-3">Your Task:</h3>
-                      <p className="text-gray-700 text-lg leading-relaxed">{selectedExercise.prompt}</p>
+                    <div className="bg-white/5 border-l-4 border-primary-500 p-6 rounded-xl shadow-lg">
+                      <h3 className="text-xl font-semibold text-white mb-3">Your Task:</h3>
+                      <p className="text-slate-300 text-lg leading-relaxed">{selectedExercise.prompt}</p>
                     </div>
                   </div>
                 )}
@@ -159,12 +156,12 @@ const Practice = () => {
                 {/* Vocabulary Exercise */}
                 {selectedExercise.type === 'Vocabulary' && (
                   <div className="mb-8">
-                    <h3 className="text-xl font-semibold text-gray-800 mb-4">Learn These Words:</h3>
+                    <h3 className="text-xl font-semibold text-white mb-4">Learn These Words:</h3>
                     <div className="grid sm:grid-cols-2 gap-4">
                       {selectedExercise.words.map((word, index) => (
-                        <div key={index} className="flex items-center justify-between p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl hover:shadow-md transition-all">
-                          <span className="text-gray-800 font-semibold text-lg">{word}</span>
-                          <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-3 rounded-full hover:scale-110 transition-transform">
+                        <div key={index} className="flex items-center justify-between p-4 bg-white/5 border border-white/5 rounded-xl hover:bg-white/10 transition-all shadow-md">
+                          <span className="text-slate-200 font-semibold text-lg">{word}</span>
+                          <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-3 rounded-full hover:scale-110 transition-transform shadow-lg">
                             <Volume2 size={18} />
                           </button>
                         </div>
@@ -174,36 +171,35 @@ const Practice = () => {
                 )}
 
                 {/* Controls */}
-                <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-gray-200">
-                  <button 
-                    className={`flex-1 flex items-center justify-center gap-3 px-6 py-4 rounded-xl font-semibold text-lg transition-all duration-300 ${
-                      isRecording 
-                        ? 'bg-red-500 text-white recording' 
-                        : 'bg-gradient-to-r from-primary-500 to-secondary-500 text-white hover:shadow-xl hover:scale-105'
-                    }`}
+                <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-white/10">
+                  <button
+                    className={`flex-1 flex items-center justify-center gap-3 px-6 py-4 rounded-xl font-semibold text-lg transition-all duration-300 ${isRecording
+                      ? 'bg-red-500 text-white recording'
+                      : 'bg-gradient-to-r from-primary-500 to-secondary-500 text-white hover:shadow-lg hover:scale-105'
+                      }`}
                     onClick={handleStartRecording}
                     disabled={isRecording}
                   >
                     <Mic size={24} />
                     {isRecording ? 'Recording...' : 'Start Recording'}
                   </button>
-                  
-                  <button className="px-6 py-4 bg-gray-200 text-gray-800 rounded-xl font-semibold hover:bg-gray-300 transition-all hover:scale-105 flex items-center justify-center gap-2">
+
+                  <button className="px-6 py-4 bg-white/5 text-slate-300 border border-white/10 rounded-xl font-semibold hover:bg-white/10 transition-all hover:scale-105 flex items-center justify-center gap-2">
                     <RefreshCw size={20} />
                     Try Again
                   </button>
-                  
-                  <button className="px-6 py-4 bg-gradient-to-r from-green-400 to-emerald-500 text-white rounded-xl font-semibold hover:shadow-xl transition-all hover:scale-105 flex items-center justify-center gap-2">
+
+                  <button className="px-6 py-4 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl font-semibold hover:shadow-lg transition-all hover:scale-105 flex items-center justify-center gap-2 shadow-lg">
                     <CheckCircle size={20} />
                     Submit
                   </button>
                 </div>
               </div>
             ) : (
-              <div className="glass-effect rounded-3xl p-16 text-center animate-fade-in">
-                <Mic size={80} className="mx-auto mb-6 text-gray-400" />
-                <h2 className="text-3xl font-bold text-gray-800 mb-4">Select an Exercise to Begin</h2>
-                <p className="text-gray-600 text-lg">Choose from the list to start practicing your English skills</p>
+              <div className="glass-card rounded-3xl p-16 text-center animate-fade-in border border-white/5">
+                <Mic size={80} className="mx-auto mb-6 text-white/10" />
+                <h2 className="text-3xl font-bold text-white mb-4">Select an Exercise to Begin</h2>
+                <p className="text-slate-400 text-lg">Choose from the list to start practicing your English skills</p>
               </div>
             )}
           </div>
