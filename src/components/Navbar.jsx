@@ -1,10 +1,12 @@
-import { Link, useLocation } from 'react-router-dom';
-import { BookOpen, User, Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { Menu, X, Globe, User, LogOut, Shield } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { user, logout } = useAuth();
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -20,8 +22,8 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="bg-gradient-to-br from-primary-500 to-secondary-500 p-2 rounded-xl animate-glow group-hover:scale-110 transition-transform">
-              <BookOpen size={28} className="text-white" />
+            <div className="bg-gradient-to-br from-indigo-500 to-purple-500 p-2 rounded-xl animate-glow group-hover:scale-110 transition-transform">
+              <Globe size={28} className="text-white" />
             </div>
             <span className="text-xl font-bold gradient-text block">SpeakSphere</span>
           </Link>
@@ -40,13 +42,44 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <Link
-              to="/profile"
-              className="ml-4 flex items-center gap-2 bg-gradient-to-r from-primary-600 to-secondary-600 text-white px-6 py-2.5 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-            >
-              <User size={18} strokeWidth={2.5} />
-              <span>Profile</span>
-            </Link>
+
+            {user?.isAdmin && (
+              <Link
+                to="/admin"
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-lg font-bold text-amber-400 hover:text-amber-300 hover:bg-amber-400/5 transition-all ${location.pathname === '/admin' ? 'bg-amber-400/10 text-amber-300' : ''}`}
+              >
+                <Shield size={16} />
+                Admin
+              </Link>
+            )}
+
+            <div className="h-6 w-px bg-white/10 mx-2"></div>
+
+            {user ? (
+              <div className="flex items-center gap-3">
+                <Link
+                  to="/profile"
+                  className="flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-5 py-2 rounded-xl font-semibold border border-white/10 transition-all"
+                >
+                  <User size={18} className="text-indigo-400" />
+                  <span>Account</span>
+                </Link>
+                <button
+                  onClick={logout}
+                  className="p-2 text-slate-400 hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-all"
+                  title="Logout"
+                >
+                  <LogOut size={20} />
+                </button>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-2.5 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                Get Started
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -60,7 +93,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden glass-effect border-t border-white/10 transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-[28rem] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+      <div className={`md:hidden glass-effect border-t border-white/10 transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-[32rem] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
         <div className="px-4 py-6 space-y-2">
           {navLinks.map((link) => (
             <Link
@@ -75,14 +108,50 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          <Link
-            to="/profile"
-            className="flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg mt-4 active:scale-95 transition-transform"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            <User size={18} strokeWidth={2.5} />
-            <span>Profile</span>
-          </Link>
+
+          {user?.isAdmin && (
+            <Link
+              to="/admin"
+              className="flex items-center gap-2 px-4 py-3 rounded-lg font-bold text-amber-400 hover:bg-amber-400/5 transition-all"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <Shield size={18} />
+              Admin Panel
+            </Link>
+          )}
+
+          <div className="pt-4 mt-4 border-t border-white/10">
+            {user ? (
+              <div className="space-y-4">
+                <Link
+                  to="/profile"
+                  className="flex items-center justify-center gap-2 bg-white/5 text-white px-6 py-3 rounded-full font-semibold border border-white/10"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <User size={18} className="text-indigo-400" />
+                  <span>My Account</span>
+                </Link>
+                <button
+                  onClick={() => {
+                    logout();
+                    setIsMenuOpen(false);
+                  }}
+                  className="w-full flex items-center justify-center gap-2 text-red-400 font-bold py-2 hover:bg-red-400/5 rounded-lg transition-all"
+                >
+                  <LogOut size={18} />
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="flex items-center justify-center bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg active:scale-95 transition-transform"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Get Started
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </nav>
