@@ -1,19 +1,22 @@
 import { User, Mail, Phone, MapPin, Edit2, Calendar, Award, Clock, Book, Settings } from 'lucide-react';
 import { useState } from 'react';
+import { useAuth } from '../hooks/useAuth';
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState('personal');
+  const { user: authUser } = useAuth();
 
   const user = {
-    name: 'Muskan Singh',
-    roles: 'Data Analyst | IELTS Trainer',
-    position: 'Founder- SpeakSphere',
-    email: 'muskansingh292001@gmail.com',
+    name: authUser?.name || 'Muskan Singh',
+    roles: authUser?.role === 'ROLE_ADMIN' ? 'Data Analyst | IELTS Trainer' : 'Learner',
+    position: authUser?.role === 'ROLE_ADMIN' ? 'Founder- SpeakSphere' : 'Student',
+    email: authUser?.email || 'muskansingh292001@gmail.com',
     phone: '+91-6295742275',
     location: 'India',
     joinDate: 'January 2024',
     level: 'Advanced',
-    totalHours: 120
+    totalHours: 120,
+    picture: authUser?.picture
   };
 
   const userDetails = [
@@ -42,7 +45,16 @@ const Profile = () => {
             <div className="relative">
               <div className="w-32 h-32 md:w-40 md:h-40 rounded-full p-1 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 shadow-[0_0_30px_rgba(99,102,241,0.3)]">
                 <div className="w-full h-full rounded-full bg-[#0f172a] overflow-hidden flex items-center justify-center border-4 border-[#0f172a]">
-                  <User size={80} className="text-white/20" />
+                  {user.picture ? (
+                    <img
+                      src={user.picture}
+                      alt={user.name}
+                      className="w-full h-full object-cover"
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    <User size={80} className="text-white/20" />
+                  )}
                 </div>
               </div>
               <button className="absolute bottom-1 right-1 p-2.5 bg-indigo-600 text-white rounded-full shadow-lg hover:bg-indigo-500 transition-colors border-2 border-[#0f172a]">

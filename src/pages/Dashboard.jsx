@@ -1,6 +1,10 @@
 import { TrendingUp, Award, Target, BookOpen, Flame, Clock } from 'lucide-react';
+import { useAuth } from '../hooks/useAuth';
 
 const Dashboard = () => {
+  const { user } = useAuth();
+  const userName = user?.name ? user.name.split(' ')[0] : 'Learner';
+
   const stats = [
     { icon: <BookOpen size={32} />, value: '3', label: 'Courses Enrolled', color: 'from-blue-500 to-cyan-500' },
     { icon: <Target size={32} />, value: '67%', label: 'Average Score', color: 'from-purple-500 to-pink-500' },
@@ -30,10 +34,11 @@ const Dashboard = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 md:mb-12 animate-fade-in-up">
           <div>
             <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">
-              Welcome back, <span className="gradient-text">Sarah!</span>
+              Welcome back, <span className="gradient-text">{userName}!</span>
             </h1>
             <p className="text-slate-400">Continue your journey to English mastery</p>
           </div>
+
         </div>
 
         {/* Stats Grid */}
