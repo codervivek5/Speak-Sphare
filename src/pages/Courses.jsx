@@ -99,20 +99,20 @@ const Courses = () => {
               </div>
 
               {/* Stats */}
-              <div className="flex flex-wrap gap-6 mb-6 pb-6 border-b border-gray-100">
-                <div className="flex items-center gap-2 text-gray-600">
-                  <Clock size={20} className="text-primary-500" />
+              <div className="flex flex-wrap gap-6 mb-6 pb-6 border-b border-white/5">
+                <div className="flex items-center gap-2 text-slate-400">
+                  <Clock size={20} className="text-indigo-400" />
                   <span className="font-medium">{course.duration}</span>
                 </div>
-                <div className="flex items-center gap-2 text-gray-600">
-                  <BookOpen size={20} className="text-primary-500" />
+                <div className="flex items-center gap-2 text-slate-400">
+                  <BookOpen size={20} className="text-indigo-400" />
                   <span className="font-medium">{course.lessons} lessons</span>
                 </div>
-                <div className="flex items-center gap-2 text-gray-600">
-                  <Users size={20} className="text-primary-500" />
+                <div className="flex items-center gap-2 text-slate-400">
+                  <Users size={20} className="text-indigo-400" />
                   <span className="font-medium">{course.students.toLocaleString()} students</span>
                 </div>
-                <div className="flex items-center gap-2 text-gray-600">
+                <div className="flex items-center gap-2 text-slate-400">
                   <Star size={20} className="text-yellow-500 fill-yellow-500" />
                   <span className="font-medium">{course.rating}</span>
                 </div>

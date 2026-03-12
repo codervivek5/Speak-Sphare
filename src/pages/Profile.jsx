@@ -143,7 +143,7 @@ const Profile = () => {
                       <div key={index} className="space-y-1.5 p-4 rounded-2xl bg-white/2 hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
                         <div className="flex items-center gap-3 text-indigo-400 mb-1">
                           {detail.icon}
-                          <span className="text-sm font-bold text-slate-500 uppercase tracking-wider">{detail.label}</span>
+                          <span className="text-sm font-bold text-slate-400 uppercase tracking-wider">{detail.label}</span>
                         </div>
                         <p className="text-white text-lg font-medium pl-9">{detail.value}</p>
                       </div>

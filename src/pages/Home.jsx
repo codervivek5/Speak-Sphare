@@ -168,17 +168,44 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="relative animate-slide-in-right order-first md:order-last mb-12 md:mb-0">
-            <div className="relative glass-effect rounded-3xl p-6 md:p-8 shadow-2xl animate-float max-w-md mx-auto md:max-w-none">
-              <div className="flex items-center justify-center w-full h-64 md:h-80 bg-gradient-to-br from-primary-400 to-secondary-400 rounded-2xl">
-                <Mic size={100} className="text-white animate-pulse-slow md:size-[120px]" />
+          <div className="relative animate-slide-in-right order-first md:order-last mb-12 md:mb-0 group/mic">
+            <div className="relative p-4 md:p-8 animate-float max-w-sm mx-auto md:max-w-none">
+              {/* Outer Decorative Rings */}
+              <div className="absolute inset-0 border-2 border-indigo-500/20 rounded-full scale-90 opacity-0 group-hover/mic:scale-110 group-hover/mic:opacity-100 transition-all duration-700"></div>
+              <div className="absolute inset-0 border border-purple-500/10 rounded-full scale-105 group-hover/mic:scale-125 group-hover/mic:opacity-0 transition-all duration-1000"></div>
+
+              <div className="relative aspect-square flex items-center justify-center">
+                {/* Background Glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-purple-500/5 rounded-full"></div>
+
+                {/* Futuristic Mic Interface */}
+                <div className="relative flex items-center justify-center w-full h-full">
+                  {/* Rotating Tech Ring */}
+                  <div className="absolute w-[95%] h-[95%] border-t-2 border-l-2 border-indigo-500/30 rounded-full animate-spin-slow"></div>
+                  <div className="absolute w-[80%] h-[80%] border-b-2 border-r-2 border-purple-500/20 rounded-full rotate-45 animate-reverse-spin"></div>
+
+                  {/* Central Glow Orb */}
+                  <div className="absolute w-64 h-64 bg-indigo-500/10 blur-[80px] rounded-full animate-pulse-slow"></div>
+
+                  {/* The Mic button itself */}
+                  <div className="relative z-10 w-32 h-32 md:w-44 md:h-44 bg-gradient-to-br from-indigo-600 via-indigo-500 to-purple-600 rounded-full flex items-center justify-center shadow-[0_0_60px_rgba(79,70,229,0.4)] group-hover/mic:shadow-[0_0_90px_rgba(79,70,229,0.6)] transition-all duration-500 border border-white/20">
+                    <Mic size={64} className="text-white animate-pulse-slow md:size-[80px]" />
+
+                    {/* Floating Tech Orbits */}
+                    <div className="absolute -top-3 -right-3 w-5 h-5 bg-indigo-400 rounded-full border-2 border-[#0f172a] animate-bounce"></div>
+                    <div className="absolute -bottom-3 -left-3 w-4 h-4 bg-purple-400 rounded-full border-2 border-[#0f172a] animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+                  </div>
+                </div>
               </div>
+
               {/* Floating badges */}
-              <div className="absolute -top-4 -right-4 bg-gradient-to-r from-green-400 to-emerald-500 text-white px-6 py-3 rounded-full shadow-xl font-bold animate-bounce-slow">
-                🎯 95% Success
+              <div className="absolute top-0 -right-4 bg-emerald-500/90 backdrop-blur-md text-white px-5 py-2.5 rounded-2xl shadow-[0_10px_30px_rgba(16,185,129,0.3)] border border-emerald-400/30 font-bold animate-bounce-slow flex items-center gap-2">
+                <span className="text-xl">🎯</span>
+                <span className="text-sm">95% Success</span>
               </div>
-              <div className="absolute -bottom-4 -left-4 bg-gradient-to-r from-blue-400 to-cyan-500 text-white px-6 py-3 rounded-full shadow-xl font-bold animate-bounce-slow" style={{ animationDelay: '0.5s' }}>
-                ⭐ 10K+ Students
+              <div className="absolute bottom-0 -left-10 bg-indigo-500/90 backdrop-blur-md text-white px-5 py-2.5 rounded-2xl shadow-[0_10px_30px_rgba(99,102,241,0.3)] border border-indigo-400/30 font-bold animate-bounce-slow flex items-center gap-2" style={{ animationDelay: '0.5s' }}>
+                <span className="text-xl">⭐</span>
+                <span className="text-sm">10K+ Students</span>
               </div>
             </div>
           </div>
