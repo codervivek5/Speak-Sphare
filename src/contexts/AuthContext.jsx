@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
+import Swal from 'sweetalert2';
 import { AuthContext } from './AuthContextInstance';
 
 export function AuthProvider({ children }) {
@@ -12,25 +14,79 @@ export function AuthProvider({ children }) {
         }
     });
 
-    const login = (email) => {
-        const isAdmin = email === 'muskansingh292001@gmail.com';
-        const userData = {
-            email,
-            role: isAdmin ? 'ROLE_ADMIN' : 'ROLE_USER',
-            isAdmin
-        };
-        setUser(userData);
-        localStorage.setItem('speak_sphere_user', JSON.stringify(userData));
-        return userData;
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
+    const openLoginModal = () => setIsLoginModalOpen(true);
+    const closeLoginModal = () => setIsLoginModalOpen(false);
+
+    const handleGoogleLogin = (credentialResponse) => {
+        try {
+            const decoded = jwtDecode(credentialResponse.credential);
+            const email = decoded.email;
+            const isAdmin = email === 'muskansingh292001@gmail.com';
+
+            const userData = {
+                email,
+                name: decoded.name,
+                picture: decoded.picture,
+                role: isAdmin ? 'ROLE_ADMIN' : 'ROLE_USER',
+                isAdmin
+            };
+
+            setUser(userData);
+            localStorage.setItem('speak_sphere_user', JSON.stringify(userData));
+            closeLoginModal();
+
+            Swal.fire({
+                title: 'Welcome Back!',
+                text: `Successfully logged in as ${decoded.name}`,
+                icon: 'success',
+                background: '#0f172a',
+                color: '#fff',
+                confirmButtonColor: '#4f46e5',
+                customClass: {
+                    popup: 'glass-card border border-white/10 rounded-[2rem]',
+                }
+            });
+
+            return userData;
+        } catch (error) {
+            console.error("Google Login Failed", error);
+            Swal.fire({
+                title: 'Login Failed',
+                text: 'An error occurred during Google sign-in.',
+                icon: 'error',
+                background: '#0f172a',
+                color: '#fff',
+                confirmButtonColor: '#ef4444',
+            });
+        }
     };
 
     const logout = () => {
         setUser(null);
         localStorage.removeItem('speak_sphere_user');
+        Swal.fire({
+            title: 'Logged Out',
+            text: 'Come back soon!',
+            icon: 'info',
+            background: '#0f172a',
+            color: '#fff',
+            timer: 2000,
+            showConfirmButton: false
+        });
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout, loading: false }}>
+        <AuthContext.Provider value={{
+            user,
+            handleGoogleLogin,
+            logout,
+            isLoginModalOpen,
+            openLoginModal,
+            closeLoginModal,
+            loading: false
+        }}>
             {children}
         </AuthContext.Provider>
     );

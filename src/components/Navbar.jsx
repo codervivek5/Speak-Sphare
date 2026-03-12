@@ -6,7 +6,7 @@ import { useAuth } from '../hooks/useAuth';
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const { user, logout } = useAuth();
+  const { user, logout, openLoginModal } = useAuth();
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -59,9 +59,9 @@ const Navbar = () => {
               <div className="flex items-center gap-3">
                 <Link
                   to="/profile"
-                  className="flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-5 py-2 rounded-xl font-semibold border border-white/10 transition-all"
+                  className="flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-5 py-2 rounded-xl font-semibold border border-white/10 transition-all group"
                 >
-                  <User size={18} className="text-indigo-400" />
+                  <User size={18} className="text-indigo-400 group-hover:scale-110 transition-transform" />
                   <span>Account</span>
                 </Link>
                 <button
@@ -73,12 +73,12 @@ const Navbar = () => {
                 </button>
               </div>
             ) : (
-              <Link
-                to="/login"
+              <button
+                onClick={openLoginModal}
                 className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-2.5 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 Get Started
-              </Link>
+              </button>
             )}
           </div>
 
@@ -143,13 +143,15 @@ const Navbar = () => {
                 </button>
               </div>
             ) : (
-              <Link
-                to="/login"
-                className="flex items-center justify-center bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg active:scale-95 transition-transform"
-                onClick={() => setIsMenuOpen(false)}
+              <button
+                onClick={() => {
+                  openLoginModal();
+                  setIsMenuOpen(false);
+                }}
+                className="flex items-center justify-center w-full bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg active:scale-95 transition-transform"
               >
                 Get Started
-              </Link>
+              </button>
             )}
           </div>
         </div>
