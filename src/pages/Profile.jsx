@@ -30,162 +30,198 @@ const Profile = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-20 md:pt-24">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-        <div className="text-center mb-10 md:mb-12 animate-fade-in-up">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
-            My <span className="gradient-text">Profile</span>
-          </h1>
-          <p className="text-lg text-slate-400">
-            Manage your personal information and learning preferences
-          </p>
-        </div>
+    <div className="min-h-screen pt-20 md:pt-24 pb-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div className="grid lg:grid-cols-3 gap-6 md:gap-8">
-          {/* Profile Card */}
-          <div className="md:col-span-1 space-y-6">
-            <div className="glass-card rounded-3xl p-6 md:p-8 text-center animate-fade-in-up border border-white/5 shadow-xl relative overflow-hidden">
-              <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-t-3xl"></div>
-              <div className="relative z-10">
-                <div className="w-32 h-32 mx-auto rounded-full p-1 bg-gradient-to-br from-indigo-400 to-purple-400 mb-6 shadow-2xl">
-                  <div className="w-full h-full rounded-full bg-[#0f172a] overflow-hidden flex items-center justify-center">
-                    <User size={64} className="text-white/20" />
-                  </div>
+        {/* Profile Hero Header */}
+        <div className="glass-card rounded-[2rem] p-8 md:p-12 mb-10 border border-white/5 shadow-2xl relative overflow-hidden animate-fade-in">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 blur-[100px] rounded-full -mr-32 -mt-32"></div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 blur-[100px] rounded-full -ml-32 -mb-32"></div>
+
+          <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12 text-center md:text-left">
+            <div className="relative">
+              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full p-1 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 shadow-[0_0_30px_rgba(99,102,241,0.3)]">
+                <div className="w-full h-full rounded-full bg-[#0f172a] overflow-hidden flex items-center justify-center border-4 border-[#0f172a]">
+                  <User size={80} className="text-white/20" />
                 </div>
-                <h2 className="text-2xl font-bold text-white mb-1">{user.name}</h2>
-                <p className="text-indigo-400 font-medium mb-4">{user.roles}</p>
-                <div className="flex items-center justify-center gap-2 text-slate-400 mb-6">
-                  <span>{user.position}</span>
-                  <span>•</span>
-                  <span>{user.joinDate}</span>
+              </div>
+              <button className="absolute bottom-1 right-1 p-2.5 bg-indigo-600 text-white rounded-full shadow-lg hover:bg-indigo-500 transition-colors border-2 border-[#0f172a]">
+                <Edit2 size={16} />
+              </button>
+            </div>
+
+            <div className="flex-1">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-medium mb-4">
+                <Award size={14} />
+                <span>Advanced Learner</span>
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">
+                {user.name}
+              </h1>
+              <p className="text-xl text-slate-300 mb-4 font-medium">{user.roles}</p>
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 md:gap-6 text-slate-400">
+                <div className="flex items-center gap-2">
+                  <MapPin size={18} className="text-indigo-400" />
+                  <span>{user.location}</span>
                 </div>
-                <button className="w-full btn-primary text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2">
-                  <Edit2 size={18} />
-                  Edit Profile
-                </button>
+                <div className="flex items-center gap-2">
+                  <Calendar size={18} className="text-purple-400" />
+                  <span>Joined {user.joinDate}</span>
+                </div>
               </div>
             </div>
 
-            <div className="glass-card rounded-3xl p-6 animate-fade-in-up border border-white/5 shadow-xl space-y-2" style={{ animationDelay: '0.1s' }}>
-              <button
-                onClick={() => setActiveTab('personal')}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === 'personal' ? 'bg-white/10 text-white font-semibold border border-white/10' :
-                  'text-slate-400 hover:bg-white/5 hover:text-white'
-                  }`}
-              >
-                <User className="flex-shrink-0" size={20} />
-                <span>Personal Info</span>
-              </button>
-              <button
-                onClick={() => setActiveTab('learning')}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === 'learning' ? 'bg-white/10 text-white font-semibold border border-white/10' :
-                  'text-slate-400 hover:bg-white/5 hover:text-white'
-                  }`}
-              >
-                <Book className="flex-shrink-0" size={20} />
-                <span>Learning Stats</span>
-              </button>
-              <button
-                onClick={() => setActiveTab('settings')}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === 'settings' ? 'bg-white/10 text-white font-semibold border border-white/10' :
-                  'text-slate-400 hover:bg-white/5 hover:text-white'
-                  }`}
-              >
-                <Settings className="flex-shrink-0" size={20} />
-                <span>Settings</span>
-              </button>
+            <div className="grid grid-cols-2 gap-4 w-full md:w-auto">
+              <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/5 text-center px-6">
+                <p className="text-3xl font-bold text-white mb-1">{user.totalHours}</p>
+                <p className="text-xs text-slate-500 uppercase tracking-wider font-bold">Total Hours</p>
+              </div>
+              <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/5 text-center px-6">
+                <p className="text-3xl font-bold text-white mb-1">12</p>
+                <p className="text-xs text-slate-500 uppercase tracking-wider font-bold">Courses</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Navigation Sidebar */}
+          <div className="lg:w-72 flex-shrink-0">
+            <div className="glass-card rounded-2xl p-4 border border-white/5 shadow-xl sticky top-24">
+              <nav className="space-y-2">
+                <button
+                  onClick={() => setActiveTab('personal')}
+                  className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all ${activeTab === 'personal' ? 'bg-indigo-600 text-white font-semibold shadow-[0_0_20px_rgba(79,70,229,0.3)]' :
+                    'text-slate-400 hover:bg-white/5 hover:text-white'
+                    }`}
+                >
+                  <User size={20} />
+                  <span>Personal Info</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('learning')}
+                  className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all ${activeTab === 'learning' ? 'bg-indigo-600 text-white font-semibold shadow-[0_0_20px_rgba(79,70,229,0.3)]' :
+                    'text-slate-400 hover:bg-white/5 hover:text-white'
+                    }`}
+                >
+                  <Book size={20} />
+                  <span>Learning Stats</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('settings')}
+                  className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all ${activeTab === 'settings' ? 'bg-indigo-600 text-white font-semibold shadow-[0_0_20px_rgba(79,70,229,0.3)]' :
+                    'text-slate-400 hover:bg-white/5 hover:text-white'
+                    }`}
+                >
+                  <Settings size={20} />
+                  <span>Account Settings</span>
+                </button>
+              </nav>
+
+              <div className="mt-8 pt-6 border-t border-white/5 px-4">
+                <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Account Status</p>
+                <div className="flex items-center gap-3 text-emerald-400">
+                  <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+                  <span className="text-sm font-medium">Verified Account</span>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Details & Stats */}
-          <div className="lg:col-span-2 space-y-6 md:space-y-8">
-            {/* Personal Information */}
-            <div className="glass-card rounded-3xl p-6 md:p-8 animate-slide-in-right border border-white/5">
-              <h2 className="text-2xl font-bold text-white mb-6">Personal Information</h2>
-
-              <div className="grid sm:grid-cols-2 gap-4">
-                {userDetails.map((detail, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-4 p-4 bg-white/5 rounded-xl transition-all border border-white/5 group shadow-lg"
-                  >
-                    <div className="flex-shrink-0 p-3 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-xl text-indigo-400 border border-indigo-500/30 group-hover:scale-110 transition-transform">
-                      {detail.icon}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <label className="block text-sm text-slate-500 mb-1">{detail.label}</label>
-                      <p className="text-white font-semibold truncate">{detail.value}</p>
-                    </div>
+          {/* Tab Content Area */}
+          <div className="flex-1 min-w-0">
+            {activeTab === 'personal' && (
+              <div className="space-y-6 animate-fade-in">
+                <div className="glass-card rounded-2xl p-8 border border-white/5 shadow-xl">
+                  <div className="flex items-center justify-between mb-8">
+                    <h2 className="text-2xl font-bold text-white">Personal Information</h2>
+                    <button className="text-indigo-400 hover:text-indigo-300 text-sm font-bold transition-colors">Update Info</button>
                   </div>
-                ))}
-              </div>
-            </div>
 
-            {/* Learning Stats */}
-            <div className="glass-card rounded-3xl p-6 md:p-8 animate-fade-in-up border border-white/5">
-              <h2 className="text-2xl font-bold text-white mb-6">Learning Statistics</h2>
-
-              <div className="grid sm:grid-cols-3 gap-6">
-                {learningStats.map((stat, index) => (
-                  <div
-                    key={index}
-                    className="text-center p-6 bg-white/5 rounded-2xl transition-all duration-300 group border border-white/5 shadow-lg"
-                  >
-                    <div className={`inline-flex p-4 rounded-xl bg-gradient-to-br ${stat.color} text-white mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
-                      {stat.icon}
-                    </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">{stat.value}</h3>
-                    <p className="text-slate-400 font-medium">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Progress Overview */}
-            <div className="glass-card rounded-3xl p-6 md:p-8 animate-fade-in-up border border-white/5">
-              <h2 className="text-2xl font-bold text-white mb-6">Course Progress</h2>
-
-              <div className="space-y-6">
-                <div>
-                  <div className="flex justify-between items-center mb-3">
-                    <div>
-                      <h4 className="font-bold text-white">Conversational English</h4>
-                      <p className="text-sm text-slate-400">36 lessons • 75% complete</p>
-                    </div>
-                    <span className="text-indigo-400 font-bold text-lg">75%</span>
-                  </div>
-                  <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full transition-all duration-500 shadow-[0_0_15px_rgba(59,130,246,0.5)]" style={{ width: '75%' }}></div>
+                  <div className="grid sm:grid-cols-2 gap-8">
+                    {userDetails.map((detail, index) => (
+                      <div key={index} className="space-y-1.5 p-4 rounded-2xl bg-white/2 hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
+                        <div className="flex items-center gap-3 text-indigo-400 mb-1">
+                          {detail.icon}
+                          <span className="text-sm font-bold text-slate-500 uppercase tracking-wider">{detail.label}</span>
+                        </div>
+                        <p className="text-white text-lg font-medium pl-9">{detail.value}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
-                <div>
-                  <div className="flex justify-between items-center mb-3">
-                    <div>
-                      <h4 className="font-bold text-white">Business English Communication</h4>
-                      <p className="text-sm text-slate-400">42 lessons • 45% complete</p>
+                <div className="glass-card rounded-2xl p-8 border border-white/5 shadow-xl">
+                  <h2 className="text-2xl font-bold text-white mb-6">Bio & Expertise</h2>
+                  <div className="space-y-4">
+                    <div className="p-4 rounded-xl bg-white/5 border border-white/5">
+                      <p className="text-slate-300 leading-relaxed italic">
+                        "{user.roles}. Dedicated to mastering communication and analytics to build world-class learning experiences."
+                      </p>
                     </div>
-                    <span className="text-purple-400 font-bold text-lg">45%</span>
-                  </div>
-                  <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-500 shadow-[0_0_15px_rgba(168,85,247,0.5)]" style={{ width: '45%' }}></div>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex justify-between items-center mb-3">
-                    <div>
-                      <h4 className="font-bold text-white">English Basics for Beginners</h4>
-                      <p className="text-sm text-slate-400">24 lessons • 100% complete</p>
-                    </div>
-                    <span className="text-emerald-400 font-bold text-lg">100%</span>
-                  </div>
-                  <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-green-500 to-emerald-500 rounded-full transition-all duration-500 shadow-[0_0_15px_rgba(16,185,129,0.5)]" style={{ width: '100%' }}></div>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
+
+            {activeTab === 'learning' && (
+              <div className="space-y-8 animate-fade-in">
+                {/* Stats Grid */}
+                <div className="grid sm:grid-cols-3 gap-6">
+                  {learningStats.map((stat, index) => (
+                    <div key={index} className="glass-card rounded-2xl p-6 border border-white/5 text-center group hover:bg-white/10 transition-all duration-300">
+                      <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${stat.color} text-white mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
+                        {stat.icon}
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-1">{stat.value}</h3>
+                      <p className="text-sm text-slate-500 font-bold uppercase tracking-wider">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Detailed Progress */}
+                <div className="glass-card rounded-2xl p-8 border border-white/5 shadow-xl">
+                  <h2 className="text-2xl font-bold text-white mb-8">Course Progress</h2>
+                  <div className="space-y-10">
+                    {[
+                      { name: 'Conversational English', progress: 75, lessons: 36, color: 'from-blue-500 to-indigo-500' },
+                      { name: 'Business English Communication', progress: 45, lessons: 42, color: 'from-purple-500 to-pink-500' },
+                      { name: 'English Basics for Beginners', progress: 100, lessons: 24, color: 'from-green-500 to-emerald-500' }
+                    ].map((course, idx) => (
+                      <div key={idx} className="group">
+                        <div className="flex justify-between items-end mb-4">
+                          <div className="space-y-1">
+                            <h4 className="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors">{course.name}</h4>
+                            <p className="text-sm text-slate-500">{course.lessons} lessons • {course.progress}% complete</p>
+                          </div>
+                          <span className="text-2xl font-black text-white/20 group-hover:text-white/40 transition-colors">{course.progress}%</span>
+                        </div>
+                        <div className="w-full h-2.5 bg-white/5 rounded-full overflow-hidden">
+                          <div
+                            className={`h-full bg-gradient-to-r ${course.color} rounded-full transition-all duration-1000 ease-out`}
+                            style={{ width: `${course.progress}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'settings' && (
+              <div className="glass-card rounded-2xl p-8 border border-white/5 shadow-xl animate-fade-in text-center py-20">
+                <Settings size={48} className="text-slate-600 mx-auto mb-6" />
+                <h2 className="text-2xl font-bold text-white mb-2">Account Settings</h2>
+                <p className="text-slate-400 max-w-sm mx-auto mb-8">
+                  Profile editing and account preferences are currently in beta and will be available soon.
+                </p>
+                <div className="flex justify-center gap-4">
+                  <button className="px-6 py-2 bg-white/5 hover:bg-white/10 text-white rounded-lg transition-colors border border-white/10">Privacy Policy</button>
+                  <button className="px-6 py-2 bg-white/5 hover:bg-white/10 text-white rounded-lg transition-colors border border-white/10">Password Reset</button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
