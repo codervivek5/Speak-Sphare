@@ -62,7 +62,7 @@ const Navbar = () => {
                   className="flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-5 py-2 rounded-xl font-semibold border border-white/10 transition-all group"
                 >
                   <User size={18} className="text-indigo-400 group-hover:scale-110 transition-transform" />
-                  <span>Account</span>
+                  <span>{user?.name || 'Account'}</span>
                 </Link>
                 <button
                   onClick={logout}
@@ -129,7 +129,7 @@ const Navbar = () => {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <User size={18} className="text-indigo-400" />
-                  <span>My Account</span>
+                  <span>{user?.name || 'My Account'}</span>
                 </Link>
                 <button
                   onClick={() => {

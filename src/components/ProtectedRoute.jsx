@@ -1,8 +1,15 @@
+import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 
 const ProtectedRoute = ({ children, requireAdmin = false }) => {
-    const { user, loading } = useAuth();
+    const { user, loading, openLoginModal } = useAuth();
+
+    useEffect(() => {
+        if (!loading && !user) {
+            openLoginModal();
+        }
+    }, [loading, user, openLoginModal]);
 
     if (loading) {
         return (
@@ -13,7 +20,7 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
     }
 
     if (!user) {
-        return <Navigate to="/login" replace />;
+        return <Navigate to="/" replace />;
     }
 
     if (requireAdmin && !user.isAdmin) {

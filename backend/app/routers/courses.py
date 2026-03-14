@@ -1,17 +1,20 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, HTTPException
 from typing import List
+from sqlmodel import Session, select
 from app.models.schema import Course
-from app.services.mock_data import MOCK_COURSES
+from app.database import get_session
 
 router = APIRouter(prefix="/courses", tags=["courses"])
 
 @router.get("/", response_model=List[Course])
-async def get_courses():
-    return MOCK_COURSES
+async def get_courses(session: Session = Depends(get_session)):
+    courses = session.exec(select(Course)).all()
+    return courses
 
 @router.get("/{course_id}", response_model=Course)
-async def get_course(course_id: int):
-    for course in MOCK_COURSES:
-        if course.id == course_id:
-            return course
-    return None # Should raise 404 in real app
+async def get_course(course_id: int, session: Session = Depends(get_session)):
+    course = session.get(Course, course_id)
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found")
+    return course
+

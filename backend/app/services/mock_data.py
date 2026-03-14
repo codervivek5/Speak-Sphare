@@ -2,7 +2,6 @@ from app.models.schema import Course, UserProfile, UserProgress
 
 MOCK_COURSES = [
     Course(
-        id=1,
         title='English Basics for Beginners',
         level='Beginner',
         duration='4 weeks',
@@ -14,7 +13,6 @@ MOCK_COURSES = [
         color='from-blue-500/20 to-indigo-500/20 border-blue-500/30'
     ),
     Course(
-        id=2,
         title='Conversational English',
         level='Intermediate',
         duration='6 weeks',
@@ -26,7 +24,6 @@ MOCK_COURSES = [
         color='from-purple-500/20 to-pink-500/20 border-purple-500/30'
     ),
     Course(
-        id=3,
         title='Business English Communication',
         level='Intermediate',
         duration='8 weeks',
@@ -38,7 +35,6 @@ MOCK_COURSES = [
         color='from-emerald-500/20 to-teal-500/20 border-emerald-500/30'
     ),
     Course(
-        id=4,
         title='Advanced Speaking & Pronunciation',
         level='Advanced',
         duration='10 weeks',

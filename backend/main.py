@@ -7,10 +7,20 @@ from app.routers import courses, user, ai, admin
 
 load_dotenv()
 
+from contextlib import asynccontextmanager
+from app.database import init_db
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Initialize database tables on startup
+    init_db()
+    yield
+
 app = FastAPI(
     title="Speak Sphere API",
     description="Backend API for Speak Sphere AI English Training Platform",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
 # CORS Configuration
@@ -18,6 +28,9 @@ origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
 ]
+production_origins = os.getenv("ALLOWED_ORIGINS")
+if production_origins:
+    origins.extend(production_origins.split(","))
 
 app.add_middleware(
     CORSMiddleware,

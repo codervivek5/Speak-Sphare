@@ -4,7 +4,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 
 const LoginModal = () => {
-    const { isLoginModalOpen, closeLoginModal, handleGoogleLogin } = useAuth();
+    const { isLoginModalOpen, closeLoginModal, handleGoogleLogin, devLogin } = useAuth();
     const navigate = useNavigate();
 
     if (!isLoginModalOpen) return null;
@@ -53,7 +53,7 @@ const LoginModal = () => {
                         <h2 className="text-2xl font-bold text-white mb-2">Sign in to SpeakSphere</h2>
                         <p className="text-slate-400 mb-8 text-sm">Continue your journey to English mastery</p>
 
-                        <div className="flex justify-center mb-8">
+                        <div className="flex justify-center mb-8 flex-col items-center gap-4">
                             <GoogleLogin
                                 onSuccess={onSuccess}
                                 onError={onError}
@@ -64,6 +64,22 @@ const LoginModal = () => {
                                 text="signin_with"
                                 width="320"
                             />
+                            
+                            {import.meta.env.DEV && (
+                                <button
+                                    onClick={() => {
+                                        const user = devLogin();
+                                        if (user && user.isAdmin) {
+                                            navigate('/admin');
+                                        } else if (user) {
+                                            navigate('/dashboard');
+                                        }
+                                    }}
+                                    className="px-4 py-2 bg-slate-800 text-white rounded-lg text-sm font-semibold hover:bg-slate-700 transition"
+                                >
+                                    Developer Bypass Login
+                                </button>
+                            )}
                         </div>
 
                         <div className="flex items-center gap-4 mb-8">

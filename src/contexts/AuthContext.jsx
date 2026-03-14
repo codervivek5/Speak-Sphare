@@ -23,7 +23,8 @@ export function AuthProvider({ children }) {
         try {
             const decoded = jwtDecode(credentialResponse.credential);
             const email = decoded.email;
-            const isAdmin = email === 'muskansingh292001@gmail.com';
+            const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL;
+            const isAdmin = ADMIN_EMAIL ? email === ADMIN_EMAIL : false;
 
             const userData = {
                 email,
@@ -63,6 +64,29 @@ export function AuthProvider({ children }) {
         }
     };
 
+    const devLogin = () => {
+        const mockUser = {
+            email: "dev@speaksphere.com",
+            name: "Developer",
+            picture: "https://api.dicebear.com/7.x/avataaars/svg?seed=Dev",
+            role: "ROLE_ADMIN",
+            isAdmin: true
+        };
+        setUser(mockUser);
+        localStorage.setItem('speak_sphere_user', JSON.stringify(mockUser));
+        closeLoginModal();
+        
+        Swal.fire({
+            title: 'Developer Login',
+            text: 'Successfully logged in with bypass',
+            icon: 'success',
+            background: '#0f172a',
+            color: '#fff',
+            confirmButtonColor: '#4f46e5',
+        });
+        return mockUser;
+    };
+
     const logout = () => {
         setUser(null);
         localStorage.removeItem('speak_sphere_user');
@@ -82,6 +106,7 @@ export function AuthProvider({ children }) {
             user,
             handleGoogleLogin,
             logout,
+            devLogin,
             isLoginModalOpen,
             openLoginModal,
             closeLoginModal,

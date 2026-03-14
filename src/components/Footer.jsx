@@ -74,11 +74,11 @@ const Footer = () => {
               Have questions? We'd love to hear from you.
             </p>
             <a
-              href="mailto:hello@speaksphare.com"
+              href="mailto:hello@speaksphere.com"
               className="inline-flex items-center gap-2 text-sm text-indigo-400 hover:text-indigo-300 font-medium transition-colors"
             >
               <Mail size={16} />
-              hello@speaksphare.com
+              hello@speaksphere.com
             </a>
           </div>
         </div>
