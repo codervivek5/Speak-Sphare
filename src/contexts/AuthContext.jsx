@@ -75,7 +75,7 @@ export function AuthProvider({ children }) {
         setUser(mockUser);
         localStorage.setItem('speak_sphere_user', JSON.stringify(mockUser));
         closeLoginModal();
-        
+
         Swal.fire({
             title: 'Developer Login',
             text: 'Successfully logged in with bypass',

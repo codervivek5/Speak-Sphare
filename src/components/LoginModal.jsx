@@ -40,7 +40,7 @@ const LoginModal = () => {
                     {/* Close Button */}
                     <button
                         onClick={closeLoginModal}
-                        className="absolute top-6 right-6 p-2 text-slate-500 hover:text-white hover:bg-white/5 rounded-full transition-all"
+                        className="absolute top-6 right-6 p-2 text-slate-500 hover:text-white hover:bg-white/5 rounded-full transition-all z-50"
                     >
                         <X size={20} />
                     </button>
