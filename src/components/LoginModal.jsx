@@ -2,6 +2,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import { X, Globe, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const LoginModal = () => {
     const { isLoginModalOpen, closeLoginModal, handleGoogleLogin, devLogin } = useAuth();
@@ -20,6 +21,17 @@ const LoginModal = () => {
 
     const onError = () => {
         console.error('Login Failed');
+        Swal.fire({
+            title: 'Login Failed',
+            text: 'Google Sign-In was unsuccessful. This might be due to an origin mismatch or the popup being closed.',
+            icon: 'error',
+            background: '#0f172a',
+            color: '#fff',
+            confirmButtonColor: '#ef4444',
+            customClass: {
+                popup: 'glass-card border border-white/10 rounded-[2rem]',
+            }
+        });
     };
 
     return (
