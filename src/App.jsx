@@ -1,3 +1,4 @@
+// Tracing deployment updates
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
